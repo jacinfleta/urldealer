@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Url dealer</title>
+</head>
+
+<body>
+
+    <h1>Redirecting...</h1>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
+
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyARTzug0uaIjJ1pAiIltC2cShrV3HrKaQU",
+        authDomain: "url-dealer.firebaseapp.com",
+        databaseURL: "https://url-dealer.firebaseio.com",
+        projectId: "url-dealer",
+        storageBucket: "url-dealer.appspot.com",
+        messagingSenderId: "998178333569",
+        appId: "1:998178333569:web:7084798b42af419469be80",
+        measurementId: "G-EEXBCQN6F9"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    firebase.firestore();
+
+    </script>
+
+    <!-- leer datos bbdd -->
+    <script>
+        let db = firebase.firestore();
+        let visits = db.collection("Visits").doc("DU90Z3UwfOLwrbI70FSZ");
+
+        visits.get().then(function(doc) {
+        
+        let visitNumber = doc.data().visit;
+
+        visits.set({
+            visit: visitNumber + 1
+        });
+            
+        console.log("Document data:", doc.data().visit);
+        
+        }).then(function() {
+            let db = firebase.firestore();
+            let visits = db.collection("Visits").doc("DU90Z3UwfOLwrbI70FSZ");
+            visits.get().then(function(doc) {
+        
+                let visitNumber = doc.data().visit;
+
+                redirect(visitNumber - 1);
+            
+                console.log("Document data:", doc.data().visit);
+        
+            });
+
+        }).catch(function(error) {
+        console.log("Error getting document:", error);
+        });
+        
+    </script>
+    
+    <script type="text/javascript" src="js/script.js"></script>
+
+
+
+
+
+</body>
+
+</html>
