@@ -1,4 +1,5 @@
-function redirect(visitNumber){
+window.onload = function() {
+    function redirect(visitNumber){
 
         caseNumber = visitNumber % 3;
         console.log(visitNumber);
@@ -15,3 +16,4 @@ function redirect(visitNumber){
                 break;
         }
 };
+  };
